@@ -48,6 +48,13 @@ h1 {
   font-family: 'Montserrat', sans-serif;
 }
 
+h3 {
+  text-align: center;
+  font-weight: normal;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+}
+
 body {
   background: #36D1DC;
   background: -webkit-linear-gradient(to right, #5B86E5, #36D1DC);
@@ -58,7 +65,7 @@ a, a:link, a:visited, a:hover, a:active {
   border-radius: 30px;
   background: none;
   border: 2px solid #fff;
-  width: 75px;
+  width: 50px;
   height: 20px;
   color: white;
   outline: none;
