@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 
-import Donut from './Donut.jsx';
+//import Bar from './Bar.jsx';
 import axios from 'axios'
+import { Bar } from 'react-chartjs-2'
+
 export default class Results extends Component {
   constructor(props) {
     super(props);
     this.state = {
       fullResults: [],
       fullLabels: [],
-      labelTally: {}
+      labelTally: {},
+      coordinates: []
     };
     this.componentDidMount = this.componentDidMount.bind(this);
     this.googleVisionAnalysis = this.googleVisionAnalysis.bind(this);
@@ -57,26 +60,109 @@ export default class Results extends Component {
   }
 
   condenseLabels() {
+    var temp;
     for (var i in this.state.fullLabels) {
       for (var l in this.state.fullLabels[i]) {
         if(this.state.labelTally[this.state.fullLabels[i][l].description]) {
-          var t = this.state.labelTally
-          t[this.state.fullLabels[i][l].description]++;
-          this.setState({labelTally : t})
+          temp = this.state.labelTally
+          temp[this.state.fullLabels[i][l].description]++;
+          this.setState({labelTally : temp})
         } else {
-          var t = this.state.labelTally
-          t[this.state.fullLabels[i][l].description] = 1;
-          this.setState({labelTally : t})
+          temp = this.state.labelTally
+          temp[this.state.fullLabels[i][l].description] = 1;
+          this.setState({labelTally : temp})
         }
+        this.incrementLabelInCoordinates(this.state.fullLabels[i][l].description)
       }
     }
+  }
+
+  incrementLabelInCoordinates(label) {
+    var temp;
+    for (var i in this.state.coordinates) {
+      if (this.state.coordinates[i].x === label) {
+        temp = this.state.coordinates
+        temp[i].y++;
+        this.setState({coordinates : temp})
+        return
+      }
+    }
+    // label not found
+    temp = this.state.coordinates
+    temp.push({ x: label, y: 1})
+    return
+  }
+    
+  renderBarChart() {
+    const config = {
+      labels: this.getLabelsArray(),
+      datasets: [
+        { 
+          label: 'Google Vision Labels',
+          backgroundColor: '#29434e',
+          borderColor: '#1b3039',
+          borderWidth: 1,
+          hoverBackgroundColor: '#78909c',
+          hoverBorderColor: '#e2f1f8',
+          data: this.getLabelCountsArray(),
+          labels: { fontColor: '#ffffff'}
+        }
+      ]
+    };
+    const o = {
+      responsive: true,
+      legend: {
+          display: 'false',
+          position: 'top',
+          labels: { fontColor: '#ffffff' }
+      },
+      title: {
+          display: false,
+      },
+      defaultFontColor: 'white',
+      scales: {
+        yAxes: [{
+            ticks: {
+                fontColor: "white",
+                fontSize: 10,
+                beginAtZero: true
+            }
+        }],
+        xAxes: [{
+            ticks: {
+                fontColor: "white",
+                fontSize: 9,
+                stepSize: 1,
+                beginAtZero: true
+            }
+        }]
+    }
+    }
+    return <Bar data={config} options={o}/>
+  }
+
+  getLabelCountsArray() {
+    var counts = []
+    for (var i in this.state.coordinates) {
+      counts.push(this.state.coordinates[i].y)
+    }
+    return counts
+  }
+
+  getLabelsArray() {
+    var labels = []
+    for (var i in this.state.coordinates) {
+      labels.push(this.state.coordinates[i].x)
+    }
+    return labels
   }
 
   render() {
     return (
       <div className="center-content">
         <h1>results for '{this.props.match.params.username}'</h1>
-        <Donut/>
+        {/* <Bar labels={this.state.labelTally} coordinates={this.state.coordinates}/> */}
+        { this.renderBarChart() }
         <a href="/" className="roundButton">back</a>
       </div>
     )
