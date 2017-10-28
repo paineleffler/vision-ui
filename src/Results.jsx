@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-//import Bar from './Bar.jsx';
 import axios from 'axios'
 import { Bar } from 'react-chartjs-2'
 
