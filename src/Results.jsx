@@ -62,6 +62,9 @@ export default class Results extends Component {
     var temp;
     for (var i in this.state.fullLabels) {
       for (var l in this.state.fullLabels[i]) {
+        if (this.state.fullLabels[i][l].description.toLowerCase().search(/(product|logo|brand|fiction|graphics|audio|circle|purple|photo caption|number|line|angle|color|white|red|yellow|blue|black|screenshot|text|label|girl|woman|man|boy|mammal|animal|material|font|area|advertising|advertisment)/) !== -1) {
+          continue; //skip this
+        }
         if(this.state.labelTally[this.state.fullLabels[i][l].description]) {
           temp = this.state.labelTally
           temp[this.state.fullLabels[i][l].description]++;
@@ -71,27 +74,10 @@ export default class Results extends Component {
           temp[this.state.fullLabels[i][l].description] = 1;
           this.setState({labelTally : temp})
         }
-        this.incrementLabelInCoordinates(this.state.fullLabels[i][l].description)
       }
     }
   }
 
-  incrementLabelInCoordinates(label) {
-    var temp;
-    for (var i in this.state.coordinates) {
-      if (this.state.coordinates[i].x === label) {
-        temp = this.state.coordinates
-        temp[i].y++;
-        this.setState({coordinates : temp})
-        return
-      }
-    }
-    // label not found
-    temp = this.state.coordinates
-    temp.push({ x: label, y: 1})
-    return
-  }
-    
   renderBarChart() {
     const config = {
       labels: this.getLabelsArray(),
@@ -121,19 +107,26 @@ export default class Results extends Component {
       defaultFontColor: 'white',
       scales: {
         yAxes: [{
-            ticks: {
-                fontColor: "white",
-                fontSize: 10,
-                beginAtZero: true
-            }
+          scaleLabel: {
+            display: true,
+            labelString: 'Picture Count',
+            fontColor: '#eceff1',
+            fontSize: 12
+          },
+          ticks: {
+            fontColor: "#eceff1",
+            fontSize: 12,
+            beginAtZero: true
+          }
         }],
         xAxes: [{
-            ticks: {
-                fontColor: "white",
-                fontSize: 9,
-                stepSize: 1,
-                beginAtZero: true
-            }
+          ticks: {
+            autoSkip: false,
+            fontColor: "#eceff1",
+            fontSize: 12,
+            stepSize: 1,
+            beginAtZero: true
+          }
         }]
     }
     }
@@ -142,16 +135,17 @@ export default class Results extends Component {
 
   getLabelCountsArray() {
     var counts = []
-    for (var i in this.state.coordinates) {
-      counts.push(this.state.coordinates[i].y)
+    for (var i in this.state.labelTally) {
+      counts.push(this.state.labelTally[i])
     }
     return counts
   }
 
   getLabelsArray() {
     var labels = []
-    for (var i in this.state.coordinates) {
-      labels.push(this.state.coordinates[i].x)
+    var keys = Object.keys(this.state.labelTally)
+    for (var i in keys) {
+      labels.push(keys[i])
     }
     return labels
   }
@@ -160,7 +154,6 @@ export default class Results extends Component {
     return (
       <div className="center-content">
         <h1>results for '{this.props.match.params.username}'</h1>
-        {/* <Bar labels={this.state.labelTally} coordinates={this.state.coordinates}/> */}
         { this.renderBarChart() }
         <a href="/" className="roundButton">back</a>
       </div>
