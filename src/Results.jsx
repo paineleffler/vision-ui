@@ -17,7 +17,7 @@ export default class Results extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:5000/users?id=${this.props.match.params.username}`)
+    axios.get(`http://localhost:5000/twitter/users?id=${this.props.match.params.username}`)
     .then((response) => {
       this.setState({
         numberImages: response.data.length,
@@ -35,7 +35,7 @@ export default class Results extends Component {
       var params = new URLSearchParams();
       params.append('tweetID', this.state.tweets[t].tweetID)
       params.append('url', this.state.tweets[t].url)
-      axios.post(`http://localhost:5000/results`, params)
+      axios.post(`http://localhost:5000/twitter/results`, params)
       .then((response) => {
         let tempResults = []
         let tempLabels = []
