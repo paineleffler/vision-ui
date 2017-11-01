@@ -14,7 +14,7 @@ export default class Home extends Component {
   }
   render() {
     return (
-      <div className="center-content">
+      <div className="center-home-content">
         <h1 id="homeTitle">how's my media</h1>
         <input id="homeSearch" type="text" value={this.state.searchBarText} placeholder="search for a user" onChange={this.handleChange}/>
         <Link to={`/results/${this.state.searchBarText}`}><i className="fa fa-arrow-right" aria-hidden="true"></i></Link>
