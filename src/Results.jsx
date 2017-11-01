@@ -62,7 +62,7 @@ export default class Results extends Component {
     var temp;
     for (var i in this.state.fullLabels) {
       for (var l in this.state.fullLabels[i]) {
-        if (this.state.fullLabels[i][l].description.toLowerCase().search(/(product|logo|brand|fiction|graphics|audio|circle|purple|photo caption|number|line|angle|color|white|red|yellow|blue|black|screenshot|text|label|girl|woman|man|boy|mammal|animal|material|font|area|advertising|advertisment)/) !== -1) {
+        if (this.state.fullLabels[i][l].description.toLowerCase().search(/(product|fun|event|snapshot|room|logo|brand|fiction|graphics|audio|circle|purple|photo caption|number|line|angle|color|white|red|yellow|blue|black|screenshot|text|label|girl|woman|man|boy|mammal|animal|material|font|area|advertising|advertisment)/) !== -1) {
           continue; //skip this
         }
         if(this.state.labelTally[this.state.fullLabels[i][l].description]) {
