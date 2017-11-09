@@ -21,7 +21,7 @@ export default class Results extends Component {
     .then((response) => {
       this.setState({
         numberImages: response.data.length,
-        tweets: response.data
+        media: response.data
       });
       this.googleVisionAnalysis()
     })
@@ -31,11 +31,12 @@ export default class Results extends Component {
   }
 
   googleVisionAnalysis () {
-    for (var t in this.state.tweets) {
+    for (var m in this.state.media) {
       var params = new URLSearchParams();
-      params.append('tweetID', this.state.tweets[t].tweetID)
-      params.append('url', this.state.tweets[t].url)
-      axios.post(`http://localhost:5000/twitter/results`, params)
+      params.append('username', this.props.match.params.username)
+      params.append('platform', this.state.media.platform)
+      params.append('url', this.state.media[m].url)
+      axios.post(`http://localhost:5000/results`, params)
       .then((response) => {
         let tempResults = []
         let tempLabels = []
@@ -62,7 +63,7 @@ export default class Results extends Component {
     var temp;
     for (var i in this.state.fullLabels) {
       for (var l in this.state.fullLabels[i]) {
-        if (this.state.fullLabels[i][l].description.toLowerCase().search(/(product|fun|event|snapshot|room|logo|brand|fiction|graphics|audio|circle|purple|photo caption|number|line|angle|color|white|red|yellow|blue|black|screenshot|text|label|girl|woman|man|boy|mammal|animal|material|font|area|advertising|advertisment)/) !== -1) {
+        if (this.state.fullLabels[i][l].description.toLowerCase().search(/(product|professional|profession|official|entrepreneur|businessperson|fun|event|snapshot|room|logo|brand|fiction|graphics|audio|circle|purple|photo caption|number|line|angle|color|white|red|yellow|blue|black|screenshot|text|label|girl|woman|man|boy|mammal|animal|material|font|area|advertising|advertisment)/) !== -1) {
           continue; //skip this
         }
         if(this.state.labelTally[this.state.fullLabels[i][l].description]) {
@@ -153,7 +154,7 @@ export default class Results extends Component {
   render() {
     return (
       <div className="center-content">
-        <h1>results for '{this.props.match.params.username}'</h1>
+        <h1>{this.state.numberImages} image results for '{this.props.match.params.username}'</h1>
         { this.renderBarChart() }
         <a href="/" className="roundButton">back</a>
       </div>
