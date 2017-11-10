@@ -13,7 +13,7 @@ class App extends Component {
         <BrowserRouter>
           <Switch>
             <Route exact path='/about' component={About} />
-            <Route path='/results/:username' component={Results} />
+            <Route path='/results/:platform/:username' component={Results} />
             <Route exact path='/' component={Home} />
             <Route render={function () {
               return <h1>Not Found</h1>

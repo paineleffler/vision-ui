@@ -17,7 +17,7 @@ export default class Results extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:5000/twitter/users?id=${this.props.match.params.username}`)
+    axios.get(`http://localhost:5000/${this.props.match.params.platform}/users?id=${this.props.match.params.username}`)
     .then((response) => {
       this.setState({
         numberImages: response.data.length,
@@ -34,7 +34,7 @@ export default class Results extends Component {
     for (var m in this.state.media) {
       var params = new URLSearchParams();
       params.append('username', this.props.match.params.username)
-      params.append('platform', this.state.media.platform)
+      params.append('platform', this.props.match.params.platform)
       params.append('url', this.state.media[m].url)
       axios.post(`http://localhost:5000/results`, params)
       .then((response) => {
