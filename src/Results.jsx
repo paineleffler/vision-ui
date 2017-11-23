@@ -8,7 +8,7 @@ export default class Results extends Component {
     super(props);
     this.state = {
       numberImages: 0,
-      currentResults: 0
+      currentResults: 0,
     };
     this.componentDidMount = this.componentDidMount.bind(this);
     this.googleVisionAnalysis = this.googleVisionAnalysis.bind(this);
@@ -24,7 +24,7 @@ export default class Results extends Component {
       this.googleVisionAnalysis()
     })
     .catch((error) => {
-      console.log("Error with Twitter Requests", error);
+      console.log("Error with User Requests", error);
     });  
   }
 
@@ -36,17 +36,37 @@ export default class Results extends Component {
       params.append('url', this.state.media[m].url)
       axios.post(`http://localhost:5000/results`, params)
       .then((response) => {
-
+        this.setState({ currentResults: this.state.currentResults + 1})
       })
       .catch((error) => {
         console.log("Error with GCPV requests", error)
       })
     }
+    this.getLabels()
+  }
+
+  getLabels() {
+    axios.get(`http://localhost:5000/users?id=${this.props.match.params.username}`)
+    .then((response) => {
+      let keys = []
+      let vals = []
+      Object.keys(response.data).forEach(function(key,index) {
+        keys.push(key)
+        vals.push(response.data[key])
+      });
+      this.setState({
+        labels: keys,
+        values: vals
+      })
+    })
+    .catch((error) => {
+      console.log("Error with GCPV requests", error)
+    })
   }
 
   renderBarChart() {
     const config = {
-      labels: this.getLabelsArray(),
+      labels: this.state.labels,
       datasets: [
         { 
           label: 'Google Vision Labels',
@@ -55,7 +75,7 @@ export default class Results extends Component {
           borderWidth: 1,
           hoverBackgroundColor: '#78909c',
           hoverBorderColor: '#e2f1f8',
-          data: this.getLabelCountsArray(),
+          data: this.state.values,
           labels: { fontColor: '#ffffff'}
         }
       ]
