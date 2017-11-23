@@ -5,6 +5,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Home from './Home.jsx';
 import Results from './Results.jsx';
 import About from './About.jsx';
+import Compare from './Compare.jsx';
 
 class App extends Component {
   render() {
@@ -14,6 +15,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/about' component={About} />
             <Route path='/results/:platform/:username' component={Results} />
+            <Route path='/compare/:user1/:user2' component={Compare} />
             <Route exact path='/' component={Home} />
             <Route render={function () {
               return <h1>Not Found</h1>

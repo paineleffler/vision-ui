@@ -7,10 +7,8 @@ export default class Results extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fullResults: [],
-      fullLabels: [],
-      labelTally: {},
-      coordinates: []
+      numberImages: 0,
+      currentResults: 0
     };
     this.componentDidMount = this.componentDidMount.bind(this);
     this.googleVisionAnalysis = this.googleVisionAnalysis.bind(this);
@@ -38,44 +36,11 @@ export default class Results extends Component {
       params.append('url', this.state.media[m].url)
       axios.post(`http://localhost:5000/results`, params)
       .then((response) => {
-        let tempResults = []
-        let tempLabels = []
-        tempResults = this.state.fullResults;
-        tempResults.push(response.data.results[0])
 
-        tempLabels = this.state.fullLabels;
-        tempLabels.push(response.data.results[0].labelAnnotations)
-
-        this.setState({
-          fullResults: tempResults,
-          fullLabels: tempLabels
-        })
-
-        this.condenseLabels()
       })
       .catch((error) => {
         console.log("Error with GCPV requests", error)
       })
-    }
-  }
-
-  condenseLabels() {
-    var temp;
-    for (var i in this.state.fullLabels) {
-      for (var l in this.state.fullLabels[i]) {
-        if (this.state.fullLabels[i][l].description.toLowerCase().search(/(product|professional|profession|official|entrepreneur|businessperson|fun|event|snapshot|room|logo|brand|fiction|graphics|audio|circle|purple|photo caption|number|line|angle|color|white|red|yellow|blue|black|screenshot|text|label|girl|woman|man|boy|mammal|animal|material|font|area|advertising|advertisment)/) !== -1) {
-          continue; //skip this
-        }
-        if(this.state.labelTally[this.state.fullLabels[i][l].description]) {
-          temp = this.state.labelTally
-          temp[this.state.fullLabels[i][l].description]++;
-          this.setState({labelTally : temp})
-        } else {
-          temp = this.state.labelTally
-          temp[this.state.fullLabels[i][l].description] = 1;
-          this.setState({labelTally : temp})
-        }
-      }
     }
   }
 
@@ -132,23 +97,6 @@ export default class Results extends Component {
     }
     }
     return <Bar data={config} options={o}/>
-  }
-
-  getLabelCountsArray() {
-    var counts = []
-    for (var i in this.state.labelTally) {
-      counts.push(this.state.labelTally[i])
-    }
-    return counts
-  }
-
-  getLabelsArray() {
-    var labels = []
-    var keys = Object.keys(this.state.labelTally)
-    for (var i in keys) {
-      labels.push(keys[i])
-    }
-    return labels
   }
 
   render() {

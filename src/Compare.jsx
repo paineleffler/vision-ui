@@ -10,7 +10,7 @@ export default class Compare extends Component {
   render() {
     return (
       <div className="center-content">
-        <h1>{this.props.match.params.user1} vs {this.props.match.params.user2} on {this.props.match.params.platform}</h1>
+        <h1>{this.props.match.params.user1} vs {this.props.match.params.user2}</h1>
         { this.renderBarChart() }
         <a href="/" className="roundButton">back</a>
       </div>
