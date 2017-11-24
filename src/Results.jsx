@@ -46,7 +46,7 @@ export default class Results extends Component {
   }
 
   getLabels() {
-    axios.get(`http://localhost:5000/users?id=${this.props.match.params.username}`)
+    axios.get(`http://localhost:5000/users?id=${this.props.match.params.username}&platform=${this.props.match.params.platform}`)
     .then((response) => {
       let keys = []
       let vals = []
