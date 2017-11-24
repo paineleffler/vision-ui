@@ -15,7 +15,7 @@ export default class Results extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:5000/${this.props.match.params.platform}/users?id=${this.props.match.params.username}`)
+    axios.get(`http://localhost:5000/${this.props.match.params.platform}/images?id=${this.props.match.params.username}`)
     .then((response) => {
       this.setState({
         numberImages: response.data.length,
@@ -46,7 +46,7 @@ export default class Results extends Component {
   }
 
   getLabels() {
-    axios.get(`http://localhost:5000/users?id=${this.props.match.params.username}&platform=${this.props.match.params.platform}`)
+    axios.get(`http://localhost:5000/labels?id=${this.props.match.params.username}&platform=${this.props.match.params.platform}`)
     .then((response) => {
       let keys = []
       let vals = []
