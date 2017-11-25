@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-
 import axios from 'axios'
 import { Bar } from 'react-chartjs-2'
+import Loading from './Loading.jsx';
 
 export default class Results extends Component {
   constructor(props) {
@@ -9,6 +9,7 @@ export default class Results extends Component {
     this.state = {
       numberImages: 0,
       currentResults: 0,
+      isLoading: true,
     };
     this.componentDidMount = this.componentDidMount.bind(this);
     this.googleVisionAnalysis = this.googleVisionAnalysis.bind(this);
@@ -58,6 +59,7 @@ export default class Results extends Component {
         labels: keys,
         values: vals
       })
+      this.setState({ isLoading: false })
     })
     .catch((error) => {
       console.log("Error with GCPV requests", error)
@@ -107,7 +109,7 @@ export default class Results extends Component {
         }],
         xAxes: [{
           ticks: {
-            autoSkip: false,
+            autoSkip: true,
             fontColor: "#eceff1",
             fontSize: 12,
             stepSize: 1,
@@ -119,12 +121,18 @@ export default class Results extends Component {
     return <Bar data={config} options={o}/>
   }
 
+  renderLoadingSVG() {
+    return (
+      <Loading />
+    )
+  }
+
   render() {
     return (
       <div className="center-content">
         <h1>{this.state.numberImages} image results for '{this.props.match.params.username}'</h1>
-        { this.renderBarChart() }
-        <a href="/" className="roundButton">back</a>
+        { this.state.isLoading ? this.renderLoadingSVG() : this.renderBarChart() }
+        <div><a href="/" className="roundButton">back</a></div>
       </div>
     )
   }
