@@ -20,11 +20,21 @@ export default class Home extends Component {
         <div><h1>how's my media</h1></div>
 
           <div>
-          <input id="homeSearch" type="text" value={this.state.searchBarText} placeholder="search for a user" onChange={this.handleChange}/>
-          <Link to={`/results/${this.state.platform}/${this.state.searchBarText}`}><i className="fa fa-arrow-right" aria-hidden="true"></i></Link>
+            <input id="homeSearch" type="text" value={this.state.searchBarText} placeholder="search for a user" onChange={this.handleChange}/>
+            <Link to={`/results/${this.state.platform}/${this.state.searchBarText}`}>
+            <i className="fa fa-arrow-right" aria-hidden="true"></i></Link>
           </div>
 
+          <div>
+            <Link to={`/results/${this.state.platform}/${this.state.searchBarText}`}>
+            <i className="fa fa-facebook"></i></Link>
 
+            <Link to={`/results/${this.state.platform}/${this.state.searchBarText}`}>
+            <i className="fa fa-twitter"></i></Link>
+
+            <Link to={`/results/${this.state.platform}/${this.state.searchBarText}`}>
+            <i className="fa fa-instagram"></i></Link>
+          </div>
       </div>
     )
   }
