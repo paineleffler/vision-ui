@@ -42,6 +42,9 @@ export default class Results extends Component {
       .catch((error) => {
         console.log("Error with GCPV requests", error)
       })
+      if (m >= 49) {
+        break;
+      }
     }
     this.getLabels()
   }
@@ -130,7 +133,7 @@ export default class Results extends Component {
   render() {
     return (
       <div className="center-content">
-        <h1>{this.state.numberImages} image results for '{this.props.match.params.username}'</h1>
+        <h1>{this.state.currentResults}/{this.state.numberImages} image results for '{this.props.match.params.username}'</h1>
         { this.state.isLoading ? this.renderLoadingSVG() : this.renderBarChart() }
         <div><a href="/" className="roundButton">back</a></div>
       </div>
