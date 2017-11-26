@@ -6,6 +6,7 @@ import Home from './Home.jsx';
 import Results from './Results.jsx';
 import About from './About.jsx';
 import Compare from './Compare.jsx';
+import Analytics from './Analytics.jsx';
 
 class App extends Component {
   render() {
@@ -16,6 +17,7 @@ class App extends Component {
             <Route exact path='/about' component={About} />
             <Route path='/results/:platform/:username' component={Results} />
             <Route path='/compare/:user1/:user2' component={Compare} />
+            <Route path='/analytics' component={Analytics} />
             <Route exact path='/' component={Home} />
             <Route render={function () {
               return <h1>Not Found</h1>
