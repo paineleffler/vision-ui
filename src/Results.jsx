@@ -130,10 +130,14 @@ export default class Results extends Component {
     )
   }
 
+  caps(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   render() {
     return (
       <div className="center-content">
-        <h1>{this.state.currentResults}/{this.state.numberImages} image results for '{this.props.match.params.username}'</h1>
+        <h1>{this.state.currentResults}/{this.state.numberImages} {this.caps(this.props.match.params.platform)} results for '{this.props.match.params.username}'</h1>
         { this.state.isLoading ? this.renderLoadingSVG() : this.renderBarChart() }
         <div><a href="/" className="roundButton">back</a></div>
       </div>
