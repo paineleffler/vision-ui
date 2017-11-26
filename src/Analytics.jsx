@@ -42,8 +42,8 @@ export default class Analytics extends Component {
   render() {
     return (
       <div className="center-content">
-        <h1>Data Analytics</h1>
-        <h3>Usernames: { this.state.users }</h3>
+        <h1>Analytics</h1>
+        <h3>Users: { this.state.users }</h3>
         <h3>Images: { this.state.images }</h3>
         <h3>Labels: { this.state.labels }</h3>
         <div>
