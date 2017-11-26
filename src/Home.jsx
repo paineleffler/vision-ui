@@ -28,7 +28,7 @@ export default class Home extends Component {
     const classes = `${active} fa fa-2x fa-inverse fa-${platform}`;
     return (
       <div id={platform} onClick={this.handleSocialChange} className="social-icon-box">
-        <i className={classes}></i>
+        <i id={platform} className={classes}></i>
       </div>
     )
   }
