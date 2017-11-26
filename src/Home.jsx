@@ -13,28 +13,36 @@ export default class Home extends Component {
   handleChange(event) {
     this.setState({searchBarText: event.target.value});
   }
+  renderSocialIcons() {
+ 
+    return (
+      <div className="social-container">
+        {this.renderIcon('facebook')}
+        {this.renderIcon('twitter')}
+        {this.renderIcon('instagram')}
+      </div>
+    )
+  }
+  renderIcon(platform) {
+    const active = this.state.platform === platform ? 'social-active' : 'social';
+    const classes = `${active} fa fa-2x fa-inverse fa-${platform}`;
+    return (
+      <div className="social-icon-box">
+        <i className={classes}></i>
+      </div>
+    )
+  }
   render() {
     return (
       <div className="flex-container">
-        
         <div><h1>how's my media</h1></div>
-
           <div>
             <input id="homeSearch" type="text" value={this.state.searchBarText} placeholder="search for a user" onChange={this.handleChange}/>
             <Link to={`/results/${this.state.platform}/${this.state.searchBarText}`}>
-            <i className="fa fa-arrow-right" aria-hidden="true"></i></Link>
+              <i className="fa arrow fa-lg fa-arrow-right" aria-hidden="true"></i>
+            </Link>
           </div>
-
-          <div>
-            <Link to={`/results/${this.state.platform}/${this.state.searchBarText}`}>
-            <i className="fa fa-facebook"></i></Link>
-
-            <Link to={`/results/${this.state.platform}/${this.state.searchBarText}`}>
-            <i className="fa fa-twitter"></i></Link>
-
-            <Link to={`/results/${this.state.platform}/${this.state.searchBarText}`}>
-            <i className="fa fa-instagram"></i></Link>
-          </div>
+          { this.renderSocialIcons() }
       </div>
     )
   }
