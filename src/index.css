@@ -56,7 +56,7 @@ h1 {
   font-weight: normal;
   color: white;
   font-family: 'Montserrat', sans-serif;
-  font-size: 34px;
+  font-size: 42px;
 }
 
 h3 {
@@ -110,15 +110,37 @@ svg rect {
 
 .social-container {
   display: flex;
-      flex-direction: row;
-      justify-content: center; 
-      align-items: center;
+  flex-direction: row;
+  justify-content: center; 
+  align-items: center;
   height: 60px;
 }
 
 .social-icon-box {
   width: 60px;
   margin: 10px;
+  padding-top: 30px;
+  text-align: center;
+}
+
+.active {
+  border-bottom: 3px solid white;
+  padding-bottom: 5px;
+}
+
+.nav-flex-container {
+  float: right;
+  display: flex;
+  flex-direction: row;
+  justify-content: center; 
+  align-items: right;
+  height: 60px;
+  padding-right: 50px;
+}
+
+.nav-flex-box {
+  width: 60px;
+  margin: 20px;
   padding-top: 20px;
   text-align: center;
 }
