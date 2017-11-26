@@ -140,7 +140,22 @@ svg rect {
 
 .nav-flex-box {
   width: 45px;
-  margin: 25px;
-  padding-top: 20px;
+  margin-right: 25px;
+  margin-left: 25px;
+  padding-top: 45px;
+  padding-right: 45px;
+  text-align: center;
+}
+
+.compare-flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; 
+  height: 600px;
+}
+
+.compare-flex-box {
+  width: 400px;
+  margin: 10px;
   text-align: center;
 }
