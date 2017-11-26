@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 
 export default class Analytics extends Component {
   constructor(props) {
@@ -9,14 +10,42 @@ export default class Analytics extends Component {
       labels: '-'
     };
   }
-
+  componentDidMount() {
+    axios.get(`http://localhost:5000/analytics/urls`)
+    .then((response) => {
+      this.setState({
+        images: response.data.numUrls
+      });
+    })
+    .catch((error) => {
+      console.log("Error with analytics/urls Requests", error);
+    });
+    axios.get(`http://localhost:5000/analytics/labels`)
+    .then((response) => {
+      this.setState({
+        labels: response.data.numLabels
+      });
+    })
+    .catch((error) => {
+      console.log("Error with analytics/labels Requests", error);
+    });  
+    axios.get(`http://localhost:5000/analytics/users`)
+    .then((response) => {
+      this.setState({
+        users: response.data.numUsers
+      });
+    })
+    .catch((error) => {
+      console.log("Error with analytics/users Requests", error);
+    });  
+  }
   render() {
     return (
       <div className="center-content">
         <h1>Data Analytics</h1>
-        <h3>Unique Usernames: { this.state.users }</h3>
-        <h3>Unique Images: { this.state.images }</h3>
-        <h3>Unique Labels: { this.state.labels }</h3>
+        <h3>Usernames: { this.state.users }</h3>
+        <h3>Images: { this.state.images }</h3>
+        <h3>Labels: { this.state.labels }</h3>
         <div>
           <a href="/" className="roundButton">back</a>
         </div>
