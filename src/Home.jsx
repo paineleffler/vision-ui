@@ -27,10 +27,13 @@ export default class Home extends Component {
     const active = this.state.platform === platform ? 'social-active' : 'social';
     const classes = `${active} fa fa-2x fa-inverse fa-${platform}`;
     return (
-      <div className="social-icon-box">
+      <div id={platform} onClick={this.handleSocialChange} className="social-icon-box">
         <i className={classes}></i>
       </div>
     )
+  }
+  handleSocialChange = (e) => {
+    this.setState({ platform: e.target.id });
   }
   render() {
     return (
