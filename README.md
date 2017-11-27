@@ -9,9 +9,23 @@ This is the React JS Frontend of the Social Media Image analysis project. This m
 ```
 
 ## Screenshots
+
+### Home
 ![Alt text](screenshots/home.png?raw=true "Home Component")
+
+This is the Home Screen where you can pick which social media to retrieve images for. You can also navigate to the Compare and Analytics Components.
+
+### Compare
+
 ![Alt text](screenshots/compare.png?raw=true "Compare Component")
+
+Here you can compare two different usernames. The username url parameters query MongoDB and show labels in common and their respective counts.
+
+### Analytics
+
 ![Alt text](screenshots/analytics.png?raw=true "Analytics Component")
+
+This is where you can see how many unique users, labels, and images that are stored in MongoDB.
 
 ## Note
 
