@@ -159,3 +159,16 @@ svg rect {
   margin: 10px;
   text-align: center;
 }
+
+.analytics-flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; 
+  height: 450px;
+}
+
+.analytics-flex-box {
+  width: 300px;
+  margin: 10px;
+  text-align: center;
+}

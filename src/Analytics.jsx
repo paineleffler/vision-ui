@@ -43,9 +43,20 @@ export default class Analytics extends Component {
     return (
       <div className="center-content">
         <h1>Analytics</h1>
-        <h3>Users: { this.state.users }</h3>
-        <h3>Images: { this.state.images }</h3>
-        <h3>Labels: { this.state.labels }</h3>
+        <div className="analytics-flex-container">
+          <div className="analytics-flex-box">
+            <i className="fa fa-users fa-inverse fa-5x"></i>
+            <h3>Users: { this.state.users }</h3>
+          </div>
+          <div className="analytics-flex-box">
+            <i className="fa fa-image fa-inverse fa-5x"></i>
+            <h3>Images: { this.state.images }</h3>
+          </div>
+          <div className="analytics-flex-box">
+            <i className="fa fa-tags fa-inverse fa-5x"></i>
+            <h3>Labels: { this.state.labels }</h3>
+          </div>
+        </div>
         <div>
           <a href="/" className="roundButton">back</a>
         </div>
