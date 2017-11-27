@@ -1,6 +1,6 @@
 # Vision-UI
 
-This is the React JS Frontend of the Social Media Image analysis project. This makes requests to the Vision-API.
+This is the React JS Frontend of the Social Media Image analysis project. This makes requests to the [Vision-API](https://github.com/paineleffler/vision-api).
 
 ## Usage
 ```
