@@ -15,6 +15,12 @@ This is the React JS Frontend of the Social Media Image analysis project. This m
 
 This is the Home Screen where you can pick which social media to retrieve images for. You can also navigate to the Compare and Analytics Components.
 
+### Results
+
+![Alt text](screenshots/results.png?raw=true "Results Component")
+
+Here you can see the Vision API labels of a specific user and a specific platform. The bar chart is interactive and is implemented with a React variant of Chart JS.
+
 ### Compare
 
 ![Alt text](screenshots/compare.png?raw=true "Compare Component")
