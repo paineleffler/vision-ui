@@ -128,10 +128,10 @@ export default class Compare extends Component {
         <h1>'{this.caps(this.props.match.params.user1)}' vs '{this.caps(this.props.match.params.user2)}'</h1>
         <div className="compare-flex-container">
           <div className="compare-flex-box">
-            <h3>Label Total: {this.state.u1Total}</h3>
+            <h3>User 1 Total: {this.state.u1Total}</h3>
           </div>
           <div className="compare-flex-box">
-            <h3>Label Total: {this.state.u2Total}</h3>
+            <h3>User 2 Total: {this.state.u2Total}</h3>
           </div>
         </div>
         { this.renderBarChart() }
