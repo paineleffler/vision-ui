@@ -59,7 +59,7 @@ export default class Compare extends Component {
       labels: this.state.labels,
       datasets: [
         { 
-          label: this.props.match.params.user1,
+          label: this.caps(this.props.match.params.user1),
           backgroundColor: '#29434e',
           borderColor: '#1b3039',
           borderWidth: 1,
@@ -69,7 +69,7 @@ export default class Compare extends Component {
           labels: { fontColor: '#ffffff'}
         },
         { 
-          label: this.props.match.params.user2,
+          label: this.caps(this.props.match.params.user2),
           backgroundColor: '#ffffff',
           borderColor: '#ffffff',
           borderWidth: 1,
@@ -119,11 +119,13 @@ export default class Compare extends Component {
     }
     return <Bar data={config} options={o}/>
   }
-
+  caps(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
   render() {
     return (
       <div className="center-content">
-        <h1>'{this.props.match.params.user1}' vs '{this.props.match.params.user2}'</h1>
+        <h1>'{this.caps(this.props.match.params.user1)}' vs '{this.caps(this.props.match.params.user2)}'</h1>
         <div className="compare-flex-container">
           <div className="compare-flex-box">
             <h3>Label Total: {this.state.u1Total}</h3>
