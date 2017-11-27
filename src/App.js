@@ -6,6 +6,7 @@ import Home from './Home.jsx';
 import Results from './Results.jsx';
 import About from './About.jsx';
 import Compare from './Compare.jsx';
+import CompareSearch from './CompareSearch.jsx';
 import Analytics from './Analytics.jsx';
 import NavBar from './NavBar.jsx';
 
@@ -20,6 +21,7 @@ class App extends Component {
               <Route exact path='/about' component={About} />
               <Route path='/results/:platform/:username' component={Results} />
               <Route path='/compare/:user1/:user2' component={Compare} />
+              <Route path='/comparesearch/' component={CompareSearch} />
               <Route path='/analytics' component={Analytics} />
               <Route exact path='/' component={Home} />
               <Route render={function () {

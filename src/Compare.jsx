@@ -136,7 +136,7 @@ export default class Compare extends Component {
         </div>
         { this.renderBarChart() }
         <div>
-          <a href="/" className="roundButton">back</a>
+          <a href="/comparesearch" className="back">back</a>
         </div>
       </div>
     )
