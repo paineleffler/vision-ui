@@ -2,6 +2,11 @@
 
 This is the React JS Frontend of the Social Media Image analysis project. This makes requests to the [Vision-API](https://github.com/paineleffler/vision-api).
 
+
+## Project Background : Social Media Image Analysis
+
+The purpose of this project was to create a tool that could quickly analyze images of a public social media account. Since looking through hundreds of images is time consuming and subjective to opinions, each of the images from a social media account were processed with Google [Cloud's Vision API](https://cloud.google.com/vision/). From the responses, labels are accumulated, filtered, and tracked to build textual data that can represent a person's interests, activities, or hobbies. Individuals' online personas can also be compared to determine if people share common interests. This project idea can be used in many different applications: suggestion algorithms for friends or pages, dating app matching, job recruiting, and even social media marketing analysis.
+
 ## Usage
 ```
   yarn
